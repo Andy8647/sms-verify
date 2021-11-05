@@ -1,9 +1,5 @@
 <template>
   <div class="enter-profile-wrap">
-    <div class="input-title">
-      <div class="step-indicator">2</div>
-      <div class="title-text" >短信验证码</div>
-    </div>
 
     <div class="dummy-input">
         <div v-for="i in 6" :id="'code-'+ (i - 1)" @click="focusInput" :key="i+2">
@@ -14,11 +10,11 @@
     <input autocomplete="one-time-code" @input="setSMSCode"
            inputmode="numeric" v-model="SMSCode" id="real-input" />
 
-    <div v-if="!isCodeValid" class="code-error-msg">此验证码错误，请重新输入。</div>
+    <div v-if="!isCodeValid" class="code-error-msg">Invalid Code</div>
 
     <div class="resend-code">
-      <span v-if="timer !== 0"> 你可以在{{timer}}秒后重新发送 </span>
-      <span v-if="timer === 0" @click="resetTimer" id="resend-btn">重新发送验证码</span>
+      <span v-if="timer !== 0"> resend {{timer}}s later </span>
+      <span v-if="timer === 0" @click="resetTimer" id="resend-btn">resend</span>
     </div>
 
 
@@ -26,14 +22,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, onMounted, toRef, watch} from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 
 export default defineComponent({
   name: "SMSVerify",
   setup(props, {emit}) {
     const codeList = ref<string[]>([" ", " ", " ", " ", " ", " "]);
     const SMSCode = ref<string>("")
-    const telNo = ref<string>("")
     const TIMERLENGTH = 60;
     const isCodeValid = ref<boolean>(true)
     const isCodeFilled = ref<boolean>(false)
@@ -126,38 +121,11 @@ $purple: #7269D5;
   justify-content: center;
   align-items: center;
   line-height: 1.5rem;
-  color: $spanlii-purple;
+  color: $purple;
   font-family: "PingFang SC", sans-serif;
   padding-bottom: 1rem;
 }
 
-.input-title {
-  display: flex;
-  align-self: flex-start;
-  margin: 1rem;
-  align-items: center;
-
-  .title-text {
-    margin-left: 0.5rem;
-    font-weight: 500;
-  }
-}
-
-.input-label {
-  font-weight: 400;
-  font-size: 0.875rem;
-}
-
-.step-indicator {
-  color: #fff;
-  min-width: 2rem;
-  min-height: 2rem;
-  background-color: $spanlii-purple;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .dummy-input {
   display: flex;
   margin: 1rem 1rem 0 1rem;
