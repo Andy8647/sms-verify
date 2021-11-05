@@ -113,7 +113,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-$spanlii-purple: #7269D5;
+$purple: #7269D5;
 
 .enter-profile-wrap {
   width: 85%;
